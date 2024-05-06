@@ -17,7 +17,7 @@
 <p>Acciones que lleva a cabo el sistema:</p>
 
 * Registro de usuarios (en este caso se definen dos tipos):
-  - Administradores del Sistemas asociados al grupo <b>administradorUMAPS</b>.
+  - Administradores del Sistema asociados al grupo <b>administradorUMAPS</b>.
   - Operadores (también llamados técnicos) asociados al grupo <b>empleadoUMAPS</b>.
 * Registro de zonas (lugares de Tegucigalpa y Comayagüela hacia donde se va a realizar el suministro de agua potable en días calendario y con rango de horas).
 * Registro de bombas.
