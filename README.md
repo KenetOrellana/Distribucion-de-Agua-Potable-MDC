@@ -8,7 +8,7 @@
 
 </h1>
 <!-- Fin de Encabezado -->
-<p>Plataforma web que realiza la gestión de la distribución de agua potable en el Municipio del Distrito Central..</p>
+<p>Plataforma web que realiza la gestión de la distribución de agua potable en el Municipio del Distrito Central.</p>
 <br>
 <p align="center">
   <picture>
