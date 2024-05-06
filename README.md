@@ -8,7 +8,9 @@
 
 </h1>
 <!-- Fin de Encabezado -->
-<p>Plataforma web que realiza la gestión de la distribución de agua potable en el Municipio del Distrito Central.</p>
+<p>Plataforma web que realiza la gestión de la distribución de agua potable en el Municipio del Distrito Central, simulando las acciones que realiza antes el SANAA (hoy UMAPS) en la capital de Honduras, Tegucigalpa y su ciudad gemela Comayagüela.</p>
+<br>
+<p>Acciones que lleva a cabo el sistema:</p>
 <br>
 <p align="center">
   <picture>
