@@ -37,3 +37,7 @@
 </p>
 <br>
 
+## Tecnologías
+* Django
+* Python
+
