@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-HN">
+    <body>
+        <!-- Tarjetas Grid UMAPS -->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 justify-content-left row-cols-3">
+                    {% for datum in data %}
+                    <div class="col mb-5 px-2">
+                        <div class="card h-100">
+                            <!-- Imagen de Bomba -->
+                            {% if datum.zona.nombre_bomba == 'Picacho' %}
+                                <img src="{% static 'img/El-Picacho.jpg' %}" title="Fuente Superficial El Picacho" alt="Fuente Superficial El Picacho">
+                            {% elif datum.zona.nombre_bomba == 'Concepción' %}
+                                <img src="{% static 'img/La-Concepcion.jpg' %}" title="Represa La Concepción" alt="Represa La Concepción">
+                            {% elif datum.zona.nombre_bomba == 'Laureles' %}
+                                <img src="{% static 'img/Los-Laureles.jpg' %}" title="Represa Los Laureles" alt="Represa Los Laureles">
+                            {% endif %}
+                            <!-- Detalle de Bomba -->
+                            <div class="card-body container p-4">
+                                <div class="row">
+                                    <div class="text-center col-8">
+                                        <!-- Detalle (Bomba) -->
+                                        <p><i class="fa-solid fa-location-dot"></i>&nbsp;<b>ZONA:</b>&nbsp;{{ datum.zona.nombre }}</p>
+                                        </p><i class="fa-solid fa-faucet"></i>&nbsp;<b>BOMBA:</b>&nbsp;{{ datum.zona.nombre_bomba }}</p> 
+                                        {% if datum.intervalo %}                                   
+                                        <p><i class="fa-solid fa-clock"></i>&nbsp;<b>HORARIO:</b></p>&nbsp;
+                                        del: {{ datum.intervalo.horaInicio }}
+                                        <br>
+                                        al: {{ datum.intervalo.horaFinal }}
+                                        </p>
+                                        {% else %}
+                                        <p><i class="fa-solid fa-clock"></i>&nbsp;<b>Ningún horario próximo</b>
+                                        {% endif %}
+                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                            {% if empleadoUMAPSautorizado or administradorUMAPSautorizado %}
+                                                {% elif user.is_superuser %}
+                                                <div class="text-center">
+                                                    <a class="btn btn-outline-dark mt-auto" href="{% url 'paneldecontrol' zona_id=datum.zona.id %}">VER</a>
+                                                </div>
+                                                {% else %}
+                                                    {% if user.groups.exists %}
+                                                    <div class="text-center">
+                                                        <a class="btn btn-outline-dark mt-auto" href="{% url 'paneldecontrol' zona_id=datum.zona.id %}">VER</a>
+                                                    </div>
+                                                    {% endif %}
+                                            {% endif %}
+                                            <br>
+                                            {% if datum.enhoras %}
+                                                <span style="color: green;"><i class="fa-solid fa-clock"></i>&nbsp;EN HORAS</span>
+                                            {% else %}
+                                                <span style="color: red;"><i class="fa-solid fa-clock"></i>&nbsp;FUERA DE HORAS</span>
+                                            {% endif %}
+                                            <br>
+                                            {% if datum.zona.activo %}
+                                                <span style="color: green;"><i class="fa-solid fa-circle-check"></i>&nbsp;ACTIVO</span>
+                                            {% else %}
+                                                <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i>&nbsp;INACTIVO</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>                                    
+                                </div>                                
+                            </div>                            
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>   
+        </section>
+    </body>
+</html>

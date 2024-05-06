@@ -1,0 +1,154 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-HN">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width">
+        <title>UMAPS | Panel de Control</title>
+        <link rel="icon" type="image/x-icon" href="" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <!-- CSS Personalizado para el Proyecto UMAPS -->
+        <link type="text/css" href='{% static "css/style-v7.css" %}' rel="stylesheet"/>
+        <link type="text/css" href='{% static "css/navbar.css" %}' rel="stylesheet"/>
+        <link type="text/css" href='{% static "css/estilos-generales.css" %}' rel="stylesheet"/>
+    </head>
+    <body id="page-top">
+        <header>
+            <!-- Botón Cerrar Sesión (Logout) Heredado -->
+            {% include "plantillaNavBarLogin.html" %}
+            <!-- Botón Cerrar Sesión (Logout) Heredado -->
+        </header>
+        <!-- NavBar Vertical Izquierdo -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top" id="sideNav">
+            <!-- Logo NavBar Vertical Izquierdo -->
+            <a href="/index/"><img src='{% static "img/Logo-UMAPS-Blanco-Vertical.png" %}' width="85%"  height="auto" title="Unidad Municipal de Agua Potable y Saneamiento" alt="Unidad Municipal de Agua Potable y Saneamiento"></a>
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="ul-panel-de-control">  
+                    <p>Accediendo como:</p>
+                    <h3><i class="fa-solid fa-user"></i></h3>
+                    <h3><span class="text-primary"><b>{{user}}</b></span></h3>
+                    <li class="li-panel-de-control"><a class="nav-link js-scroll-trigger" href="#vista">Vista General</a></li>
+                    <li class="li-panel-de-control"><a class="nav-link js-scroll-trigger" href="#registro">Registro de Actividad</a></li>
+                    <li class="li-panel-de-control"><a class="nav-link js-scroll-trigger" href="#calendario">Calendario</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-0">
+            {% comment %}
+            VISTA GENERAL
+            {% endcomment %}
+            <section class="resume-section" id="vista">
+                <div class="resume-section-content">
+                    <h3 class="mb-0"><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;{{ zona.nombre }}</h3>
+                    <div class="subheading mb-5">
+                        <h4><i class="fa-solid fa-faucet"></i>&nbsp;&nbsp;&nbsp;{{ zona.nombre_bomba }}</h4>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col rounded-soft-bg m-2">
+                                <p class="text-primary text-dark"><b>Estado actual:</b></p>
+                                <p class="text-success">
+                    
+                                    {% if zona.activo %}
+                                    <span style="color: green;"><i class="fa-solid fa-circle-check"></i>&nbsp;<b>ACTIVO</b></span>
+                                    {% else %}
+                                    <span style="color: red;"><i class="fa-solid fa-circle-xmark"></i>&nbsp;<b>INACTIVO</b></span>
+                                    {% endif %}
+                                    
+                                </p>
+                                {% if empleadoUMAPSautorizado or administradorUMAPSautorizado %}
+                                <form method="post" action="{% url 'paneldecontrol' zona.id %}">
+
+                                    {% csrf_token %}
+
+                                    <button type="submit" name="toggle_activo" class="btn btn-primary">
+                                        {% if zona.activo %}
+                                        Desactivar Bomba
+                                        {% else %}
+                                        Activar Bomba
+                                        {% endif %}
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </div>
+                            <div class="col rounded-soft-bg m-2">
+                                <b><p class="text-primary text-dark">Horario:</p></b>
+                                <p>{{ intervalo.horaInicio }} - {{ intervalo.horaFinal }} </p>
+                                {% if enhoras %}
+                                <b><p class="text-success">En horas activas</p></b>
+                                {% else %}
+                                <b><p class="text-danger">En horas inactivas</p></b>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% comment %}
+            REGISTRO DE ACTIVIDAD
+            {% endcomment %}
+            <section class="resume-section" id="registro">
+                <div class="resume-section-content">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="text-primary text-dark">Registro de actividad</h3>
+                            <table class="table">
+                                <thead class="thead-info text-primary">
+                                    <tr>                                
+                                        <th scope="col">Responsable</th>
+                                        <th scope="col">Acción</th>
+                                        <th scope="col">Fecha y hora</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                        {% for registro in registros %}
+                                        <tr>
+                                            <td>{{ registro.responsable }}</td>
+                                            {% if registro.activacion %}<td class="text-success">Activado{% else %}<td class="text-danger">Desactivado{% endif %}</td>
+                                            <td>{{ registro.tiempo }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </div>
+                                </div>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="resume-section" id="calendario">
+                <div class="resume-section-content">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Calendario de actividad para {{ zona.nombre }}</h3>
+                            {% for intervalo in todosIntervalos %}
+                                {{ intervalo.horaInicio }} - {{ intervalo.horaFinal }}, agregado por {{ intervalo.responsable.user.username }} <br><hr class="dashed">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
+                    {% if empleadoUMAPSautorizado or administradorUMAPSautorizado %}
+                    <form method="post" action="{% url 'paneldecontrol' zona.id %}">
+                        <div class="card">
+                            <div class="card-body">
+                            
+                            {% csrf_token %}
+                            
+                            {{ intervaloForm | crispy }}
+
+                            <button type="submit" class="btn btn-primary" name="intervalo_form_submit">ENVIAR</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </section>
+    </body>
+</html>

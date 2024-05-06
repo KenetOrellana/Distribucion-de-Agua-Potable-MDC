@@ -1,0 +1,95 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-HN">
+    <head>
+        <meta charset="utf-8">
+        <title>UMAPS | Distribución</title>
+        <meta name="viewport" content="width=device-width">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <!-- CSS Personalizado para el Proyecto UMAPS -->
+        <link type="text/css" href='{% static "css/navbar.css" %}' rel="stylesheet"/>
+        <link type="text/css" href='{% static "css/estilos-generales.css" %}' rel="stylesheet"/>
+    </head> 
+    <body>
+        <header>
+            <!-- Barra de Navegación Inicio de Sesión (Login) Heredado -->
+            {% include "plantillaNavBarLogin.html" %}
+            <!-- Barra de Navegación Inicio de Sesión (Login) Heredado -->
+
+            <!-- Encabezado Heredado -->
+            {% include "plantillaEncabezadoPrincipal.html" %}
+            <!-- Encabezado Heredado -->
+
+            <!-- NavBar Heredado -->
+            {% include "plantillaNavBar.html" %}
+            <!-- NavBar Heredado -->
+        </header>
+    <h1 class="encabezado-general"><i class="fa-solid fa-clock"></i></h1>
+    <br>
+    <p style="text-align: center; font-size: 25px;">INTERVALOS DE TIEMPO</p>
+    <p style="text-align: center;">CONTROL DE APERTURA Y CIERRE DE BOMBAS</p>
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}}" role="alert">
+                    {{message}}
+                </div>
+                {% endfor %}
+                <form method="post">
+                    <div class="card">
+                        <div class="card-body">
+                            {% csrf_token %}
+                            {{ intervalo_form | crispy }}
+                            <button type="submit" name="intervalo_form_submit" class="btn btn-primary">REGISTRAR</button>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+        </div>
+        <h1 class="encabezado-general"><i class="fa-solid fa-location-dot"></i></h1>
+        <br>
+        <p style="text-align: center; font-size: 25px;">REGISTRO DE ZONAS</p>
+        <p style="text-align: center;">CONTROL DE CREACIÓN DE NUEVAS ZONAS Y BOMBAS</p>
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-body">
+                            {% csrf_token %}
+                            {{ zona_form | crispy }}
+                            <button type="submit" name="zona_form_submit" class="btn btn-primary">REGISTRAR</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>    
+    <script type="text/javascript">
+        $(function () {
+            $('#start_datetime, #end_datetime').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm:ss',
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-crosshairs',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            });
+        });
+    </script>
+<br>
+<br>
+<!-- Pie de Página (footer) -->
+<footer class="footer">
+    <div class="container"><p class="m-0 text-center text-white">Derechos Reservados &copy; Sistemas Expertos (IS-912) | Programación Web | UNAH 2024</p></div>
+</footer>
+<!-- Pie de Página (footer) -->
+</body>
+<html>

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-HN">
+    <body>
+        <ul>
+            <li><a href="{% url 'bienvenida' %}"><i class="fa-solid fa-house"></i>&nbsp;&nbsp;Inicio</a></li>
+            {% comment %}
+            Valida si el usuario ingresó correctamente
+            {% endcomment %}
+            {% if user.is_authenticated %}
+                {% comment %}
+                Valida el tipo de nivel de usuario, por ejemplo staff & superuser
+                - para staff utilizar: is_staff
+                - para superuser utilizar: is_superuser
+                {% endcomment %}
+                {% if empleadoUMAPSautorizado or administradorUMAPSautorizado %}
+                    {% elif user.is_superuser %}
+                    <li><a href="{% url 'agregarintervalo' %}"><i class="fa-solid fa-faucet"></i>&nbsp;&nbsp;Distribución</a></li>
+                    <li><a href="{% url 'mostrarcalendario' %}"><i class="fa-solid fa-calendar"></i>&nbsp;&nbsp;Calendario</a></li>
+                    <li><a href="/admin"><i class="fa-solid fa-lock"></i>&nbsp;&nbsp;Panel de Administración del Sistema</a></li>
+                    {% elif user.groups.exists %}
+                    <li><a href="{% url 'agregarintervalo' %}"><i class="fa-solid fa-faucet"></i>&nbsp;&nbsp;Distribución</a></li>
+                    <li><a href="{% url 'mostrarcalendario' %}"><i class="fa-solid fa-calendar"></i>&nbsp;&nbsp;Calendario</a></li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </body>
+</html>
