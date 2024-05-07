@@ -35,9 +35,9 @@
     <img alt="" height="auto" width="auto" src="0" title="">
   </picture>
 </p>
-<br>
 
 ## Tecnologías
-* Django
-* Python
+* <b>Python</b>: Lenguaje de programación interpretado, de alto nivel y multiparadigma. Reconocido por su sintaxis clara y legible, Python es ampliamente utilizado en una variedad de campos, desde desarrollo web y aplicaciones de escritorio hasta análisis de datos, inteligencia artificial y desarrollo de juegos. Su versatilidad y simplicidad hacen que sea accesible tanto para principiantes como para desarrolladores experimentados.
+* <b>Django</b>: Marco de trabajo (framework) web de alto nivel para Python que ofrece una solución completa y robusta para el desarrollo de aplicaciones web, gracias a que proporciona una amplia gama de características integradas y herramientas para facilitar el desarrollo rápido y limpio. Django sigue el patrón de diseño Modelo-Vista-Controlador (MVC) y se enfoca en la creación de aplicaciones web escalables y seguras. Con su ORM (Mapeo Objeto-Relacional) incorporado, sistema de enrutamiento, sistema de plantillas y sólida capa de seguridad, Django promueve las mejores prácticas de desarrollo y es ampliamente utilizado en proyectos web de todos los tamaños.
+* <b>MySQL</b>: Sistema de Gestión de Bases de Datos (SGBD) ampliamente utilizado en el desarrollo de aplicaciones web y empresariales, especialmente en combinación con tecnologías como Python y Django. MySQL sirve como la solución confiable y eficiente para almacenar y gestionar datos en aplicaciones web desarrolladas con Python y Django. Con esta combinación, los clientes pueden crear y administrar bases de datos para almacenar información clave de su negocio, como usuarios, productos y transacciones, mientras aprovechan las capacidades de Python y Django para construir la lógica de la aplicación y la interfaz de usuario de manera eficiente.
 
