@@ -57,7 +57,7 @@
 </p>
 <br>
 <p align="center">
-    <img alt="Panel de Control" height="auto" width="auto" src="https://github.com/KenetOrellana/Distribucion-de-Agua-Potable-MDC/assets/86451633/be548647-dd28-497e-8e16-797fcc959023" title="Panel de Control">
+    <img alt="Panel de Control" height="auto" width="auto" src="https://github.com/KenetOrellana/Distribucion-de-Agua-Potable-MDC/assets/86451633/b3b1ae23-5e13-4c1b-bb59-64eb4bd39b28" title="Panel de Control">
   </picture>
 </p>
 <br>
