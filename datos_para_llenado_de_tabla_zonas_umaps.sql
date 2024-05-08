@@ -1,0 +1,16 @@
+INSERT INTO miapp_zonasumaps (id, nombre, nombre_bomba, activo) 
+VALUES (1, "Barrio El Olvido", "La Leona", True),
+       (2, "Colonia Palmira", "Picacho", True),
+       (3, "Lomas del Tablón", "Kennedy III", True),
+       (4, "Bella Oriente", "Kennedy III", True),
+       (5, "Divanna", "Concepción", True),
+       (6, "Los Robles", "Laureles", True),
+       (7, "Aldea Suyapa", "Concepción", True),
+       (8, "La Hacienda", "Concepción", True),
+       (9, "Sector de Casamata", "La Leona", True),
+       (10," Aldea El Chimbo", "Picacho", True),
+       (11," Lomas del Guijarro", "Laureles-Concepción", True),
+       (12," Altos del Trapiche (1, 2, 3 y 4 Etapa)", "Concepción", True),
+       (13," Argentina", "Laureles-Concepción", True),
+       (14," Pueblo Nuevo", "Laureles-Concepción", True),
+       (15," Divanna y Jardines del Country", "Concepción", True);
